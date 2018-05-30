@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item android:id="@+id/home" android:title="Home" android:icon="@drawable/manage_account"/>
+
+        <item android:id="@+id/account" android:title="Profile" android:icon="@drawable/profile"/>
+        <item android:id="@+id/addcart" android:title="Cart View" android:icon="@drawable/add_cart"/>
+        <item android:id="@+id/checkout" android:title="Check Out"/>
+        <item android:id="@+id/inquire" android:title="Inquire" android:icon="@drawable/contact"/>
+        <item android:id="@+id/purchase" android:title="Purchased Items" android:icon="@drawable/contact"/>
+
+
+
+
+    </group>
+
+    <item android:title="Communicate">
+        <menu>
+
+            <item
+                android:id="@+id/settings"
+                android:icon="@drawable/ic_menu_share"
+                android:title="Settings" />
+
+            <item android:id="@+id/logout" android:title="Log Out"/>
+        </menu>
+    </item>
+
+</menu>
