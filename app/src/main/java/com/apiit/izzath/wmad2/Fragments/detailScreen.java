@@ -29,7 +29,7 @@ import java.util.List;
  */
 
 public class detailScreen extends Fragment {
-    TextView testing,price,description,longDescription;
+    TextView testing,price,description,longDescription,quantityview;
     EditText quantity;
     Long id;
 
@@ -43,6 +43,7 @@ public class detailScreen extends Fragment {
         Button share=(Button)view.findViewById(R.id.button2);
         testing=(TextView)view.findViewById(R.id.name);
         price=(TextView)view.findViewById(R.id.price);
+        quantityview=(TextView)view.findViewById(R.id.qname);
         quantity=(EditText)view.findViewById(R.id.allquantity);
         description=(TextView)view.findViewById(R.id.description);
         longDescription =(TextView)view.findViewById(R.id.longDescription);
@@ -61,6 +62,7 @@ public class detailScreen extends Fragment {
             description.setText(product.getShortDescription());
             longDescription.setText(product.getLongDescription());
             Picasso.get().load(product.getScaledImage()).into(img);
+            quantityview.setText(Integer.toString(product.getQuantity()));
             }
 
     cart.setOnClickListener(new View.OnClickListener() {
@@ -87,17 +89,23 @@ public class detailScreen extends Fragment {
               Cart camel=Cart.findById(Cart.class,cartid);
                 Toast.makeText(getContext(), "The Product is Already Added to the Cart", Toast.LENGTH_SHORT).show();
                 int quantity12=camel.getQuantity();
-                int qaa= Integer.parseInt(quantity.getText().toString());
+               final int qaa= Integer.parseInt(quantity.getText().toString());
                // int quantity1 = Integer.parseInt(qaa);
                camel.setQuantity(quantity12+qaa);
                camel.save();
+            int updatequantity=  (( products.getQuantity())-(qaa));
+            products.setQuantity(updatequantity);
+            products.save();
 
             }
             else {
 
                 int qaa= Integer.parseInt(quantity.getText().toString());
-                Cart item=new Cart(rg,products,sp.getLong("id",10),qaa);
+                Cart item=new Cart(rg,products,sp.getLong("id",10),qaa,"Pending");
                 item.save();
+                int updatequantity=  (( products.getQuantity())-(qaa));
+                products.setQuantity(updatequantity);
+                products.save();
 
             }
 

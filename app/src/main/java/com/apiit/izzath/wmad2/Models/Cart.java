@@ -10,8 +10,16 @@ public class Cart extends SugarRecord<Cart> {
 Register register;
 Product product;
 Long user;
+String status;
 int quantity;
 
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
 
     public Long getUser() {
         return user;
@@ -46,11 +54,12 @@ int quantity;
     }
 
 
-    public Cart(Register register, Product product, Long user,int quantity) {
+    public Cart(Register register, Product product, Long user,int quantity,String status) {
         this.register = register;
         this.product = product;
         this.user=user;
         this.quantity = quantity;
+        this.status=status;
     }
 
     public Cart() {

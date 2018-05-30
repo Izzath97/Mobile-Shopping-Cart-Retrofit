@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -44,12 +45,18 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
         final Cart cc = cart.get(position);
         //holder.cat.setText(cc.getProduct().getShortDescription());
         holder.quantity.setText(cc.getProduct().getShortDescription());
-
         //   holder.price.setText(product.getQuantity());
         Picasso.get().load(cc.getProduct().getScaledImage()).into(holder.img);
         //  holder.price.setText(((String) product.getPrice()));
         holder.price.setText("Rs: " + Double.toString(cc.getProduct().getPrice()));
         holder.qan.setText("Quantity : "+Integer.toString(cc.getQuantity()));
+        holder.delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                cc.setStatus("Canceled");
+                cc.save();
+            }
+        });
     }
 
 
@@ -61,6 +68,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
     public class ViewHolder extends RecyclerView.ViewHolder{
         public ImageView img;
         public TextView price,quantity,qan;
+        public Button delete;
 
         CardView cardview;
 
@@ -70,7 +78,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
             qan=(TextView)itemView.findViewById(R.id.allquantity);
             quantity=(TextView)itemView.findViewById(R.id.cartprice) ;
             price=(TextView)itemView.findViewById(R.id.cartprice);
-
+            delete=(Button)itemView.findViewById(R.id.delete);
             cardview=(CardView)itemView.findViewById(R.id.cartview);
             //   quantity=(TextView)itemView.findViewById(R.id.quantity);
 
