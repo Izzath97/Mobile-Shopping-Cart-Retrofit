@@ -22,21 +22,15 @@ public class MainActivity extends AppCompatActivity {
 
         setTheme(R.style.AppTheme);
         super.onCreate(savedInstanceState);
-
-
-
-
         if(Tags.listAll(Tags.class).isEmpty()){
 
             Gson gson1=new Gson();
-
             String tags="[{\"tagid\":\"1\",\"tagName\":\"White\"},{\"tagid\":\"2\",\"tagName\":\"Black\"},{\"tagid\":\"3\",\"tagName\":\"Blue\"},{\"tagid\":\"4\",\"tagName\":\"Red\"},{\"tagid\":\"5\",\"tagName\":\"Yellow\"},{\"tagid\":\"6\",\"tagName\":\"Purple\"},{\"tagid\":\"7\",\"tagName\":\"Pink\"},{\"tagid\":\"8\",\"tagName\":\"men\"},{\"tagid\":\"9\",\"tagName\":\"boy\"},{\"tagid\":\"10\",\"tagName\":\"women\"},{\"tagid\":\"11\",\"tagName\":\"watch\"},{\"tagid\":\"12\",\"tagName\":\"trouser\"},{\"tagid\":\"13\",\"tagName\":\"shirt\"},{\"tagid\":\"14\",\"tagName\":\"t-shirt\"},{\"tagid\":\"15\",\"tagName\":\"short\"},{\"tagid\":\"16\",\"tagName\":\"bikini\"},{\"tagid\":\"17\",\"tagName\":\"sari\"},{\"tagid\":\"18\",\"tagName\":\"v neck\"},{\"tagid\":\"19\",\"tagName\":\"round neck\"}]";
-
             Type lits=new TypeToken<List<Tags>>(){}.getType();
             List<Tags> tag=gson1.fromJson(tags,lits);
             Tags.saveInTx(tag);
         }
-if(Product.listAll(Product.class).isEmpty()){
+  if(Product.listAll(Product.class).isEmpty()){
 
     Gson gson=new Gson();
 

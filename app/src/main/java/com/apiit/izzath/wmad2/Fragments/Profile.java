@@ -39,17 +39,18 @@ public class Profile extends Fragment {
 
       //  user=Register.listAll(Register.class);
         SharedPreferences sp= this.getActivity().getApplicationContext().getSharedPreferences(login.MyPREFERENCES, Context.MODE_PRIVATE);
+        Register rgg=Register.findById(Register.class,sp.getLong("id",10));
 
         List<Register> user= Register.findWithQuery(Register.class, "Select * from Register where name = ?",sp.getString("User","Name"));
 
 
-        for (Register user1:user) {
-                name.setText(sp.getString("User","Name"));
-                email.setText(user1.getEmail().toString());
+
+                name.setText(rgg.getName());
+                email.setText(rgg.getEmail());
 
 
 
-        }
+
 
         edit.setOnClickListener(new View.OnClickListener() {
             @Override

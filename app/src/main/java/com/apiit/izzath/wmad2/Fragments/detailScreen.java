@@ -69,7 +69,7 @@ public class detailScreen extends Fragment {
         @Override
         public void onClick(View view) {
             Long productids= Long.valueOf(10);
-            Long cartid= Long.valueOf(10);
+           Long cartid= Long.valueOf(10);
             SharedPreferences sp= getActivity().getSharedPreferences(login.MyPREFERENCES, Context.MODE_PRIVATE);
             Long userid=sp.getLong("id",10);
             Product products=Product.findById(Product.class,productid);          //Product Object is returned
