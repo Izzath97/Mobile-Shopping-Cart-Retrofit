@@ -68,51 +68,60 @@ public class detailScreen extends Fragment {
     cart.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            Long productids= Long.valueOf(10);
-           Long cartid= Long.valueOf(10);
-            SharedPreferences sp= getActivity().getSharedPreferences(login.MyPREFERENCES, Context.MODE_PRIVATE);
-            Long userid=sp.getLong("id",10);
-            Product products=Product.findById(Product.class,productid);          //Product Object is returned
-            Register rg=Register.findById(Register.class,userid);   //User object is returned
-
-            List <Cart> ccr=  Cart.listAll(Cart.class);     //List of Cart is returned
-
-            for (Cart cart:ccr) {
-                if (cart.getProduct().getId().equals(products.getId())&&cart.getRegister().getId().equals(userid)){
-           productids=cart.getProduct().getId();
-           cartid=cart.getId();
-                }
-            }
-            Cart cca=  Cart.findById(Cart.class,productids);
-            if(products.getId().equals(productids)){
-
-              Cart camel=Cart.findById(Cart.class,cartid);
-                Toast.makeText(getContext(), "The Product is Already Added to the Cart", Toast.LENGTH_SHORT).show();
-                int quantity12=camel.getQuantity();
-               final int qaa= Integer.parseInt(quantity.getText().toString());
-               // int quantity1 = Integer.parseInt(qaa);
-               camel.setQuantity(quantity12+qaa);
-               camel.save();
-            int updatequantity=  (( products.getQuantity())-(qaa));
-            products.setQuantity(updatequantity);
-            products.save();
+            if(quantity.getText().toString().isEmpty()){
+                quantity.setError("Enter Quantity to ADD TO Cart");
 
             }
             else {
+                Long productids = Long.valueOf(10);
+                Long cartid = Long.valueOf(10);
+                SharedPreferences sp = getActivity().getSharedPreferences(login.MyPREFERENCES, Context.MODE_PRIVATE);
+                Long userid = sp.getLong("id", 10);
+                Product products = Product.findById(Product.class, productid);          //Product Object is returned
+                Register rg = Register.findById(Register.class, userid);   //User object is returned
+                List<Cart> cart1 = Cart.listAll(Cart.class);     //List of Cart is returned
+                for (Cart cart : cart1) {
+                    if (cart.getProduct().getId().equals(products.getId()) && cart.getRegister().getId().equals(userid)) {
+                        productids = cart.getProduct().getId();
+                        cartid = cart.getId();
+                    }
+                }
+                // Cart cca=  Cart.findById(Cart.class,productids);
+                if (products.getId().equals(productids)) {
+                    Cart cartfind = Cart.findById(Cart.class, cartid);
+                    Toast.makeText(getContext(), "The Product is Already Added to the Cart", Toast.LENGTH_SHORT).show();
+                    int quantitycart = cartfind.getQuantity();
+                    final int enterquantity = Integer.parseInt(quantity.getText().toString());
+                    // int quantity1 = Integer.parseInt(qaa);
+                    if (enterquantity <= products.getQuantity()) {
+                        cartfind.setQuantity(quantitycart + enterquantity);
+                        cartfind.save();
+                        int updatequantity = ((products.getQuantity()) - (enterquantity));
+                        products.setQuantity(updatequantity);
+                        products.save();
+                    } else {
+                        quantity.setError("Invalid Quantity");
 
-                int qaa= Integer.parseInt(quantity.getText().toString());
-                Cart item=new Cart(rg,products,sp.getLong("id",10),qaa,"Pending");
-                item.save();
-                int updatequantity=  (( products.getQuantity())-(qaa));
-                products.setQuantity(updatequantity);
-                products.save();
+                    }
+                } else {
+                    int enterquantity = Integer.parseInt(quantity.getText().toString());
+                    if (enterquantity <= products.getQuantity()) {
+                        Cart item = new Cart(rg, products, sp.getLong("id", 10), enterquantity, "Pending");
+                        item.save();
+                        int updatequantity = ((products.getQuantity()) - (enterquantity));
+                        products.setQuantity(updatequantity);
+                        products.save();
+                    } else {
+                        quantity.setError("Invalid Quantity");
+
+                    }
+
+                }
+
+
+                List<Cart> cc = Cart.listAll(Cart.class);
 
             }
-
-
-    List<Cart> cc=Cart.listAll(Cart.class);
-
-
     }
 });
 
