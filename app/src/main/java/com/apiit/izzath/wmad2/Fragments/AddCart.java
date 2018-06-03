@@ -42,7 +42,7 @@ public class AddCart extends Fragment {
         SharedPreferences sp= getActivity().getSharedPreferences(login.MyPREFERENCES, Context.MODE_PRIVATE);
         Long id=sp.getLong("id",10);
         List<Cart> car= Cart.findWithQuery(Cart.class, "Select * from Cart where user = ? ", id.toString());
-
+//ds
         card = new CartAdapter( car,getContext() );
         cartView.setAdapter(card);
 
