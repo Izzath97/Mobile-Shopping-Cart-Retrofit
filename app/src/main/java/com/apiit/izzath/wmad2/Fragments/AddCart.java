@@ -41,8 +41,8 @@ public class AddCart extends Fragment {
         //List<Cart> cart=Cart.listAll(Cart.class);
         SharedPreferences sp= getActivity().getSharedPreferences(login.MyPREFERENCES, Context.MODE_PRIVATE);
         Long id=sp.getLong("id",10);
-        List<Cart> car= Cart.findWithQuery(Cart.class, "Select * from Cart where user = ? ", id.toString());
-//ds
+        List<Cart> car= Cart.findWithQuery(Cart.class, "Select * from Cart where user = ? and status = ? ", id.toString(),"Pending");
+
         card = new CartAdapter( car,getContext() );
         cartView.setAdapter(card);
 

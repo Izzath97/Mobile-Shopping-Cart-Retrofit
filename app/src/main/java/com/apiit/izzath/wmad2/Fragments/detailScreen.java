@@ -95,6 +95,7 @@ public class detailScreen extends Fragment {
                     // int quantity1 = Integer.parseInt(qaa);
                     if (enterquantity <= products.getQuantity()) {
                         cartfind.setQuantity(quantitycart + enterquantity);
+                        cartfind.setStatus("Pending");
                         cartfind.save();
                         int updatequantity = ((products.getQuantity()) - (enterquantity));
                         products.setQuantity(updatequantity);

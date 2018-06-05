@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.apiit.izzath.wmad2.Models.Cart;
+import com.apiit.izzath.wmad2.Models.Product;
 import com.apiit.izzath.wmad2.R;
 import com.squareup.picasso.Picasso;
 
@@ -54,6 +55,13 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
             @Override
             public void onClick(View view) {
                 cc.setStatus("Canceled");
+
+
+                Product product=Product.findById(Product.class,cc.getProduct().getId());
+                int quantity=cc.getQuantity()+product.getQuantity();
+                product.setQuantity(quantity);
+                product.save();
+                cc.setQuantity(0);
                 cc.save();
             }
         });
