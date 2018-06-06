@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:backgroundTint="@color/cardview_light_background">
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/cartview"
@@ -11,7 +12,7 @@
 
         android:layout_height="wrap_content"
         android:clickable="true"
-        android:foreground="?android:attr/selectableItemBackgroundBorderless"/>
+        android:foreground="?android:attr/selectableItemBackgroundBorderless" />
 
     <Button
         android:id="@+id/checkout"
@@ -21,8 +22,11 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
+        android:background="@drawable/loginbutton"
+        android:backgroundTint="@color/greyone"
         android:onClick="checkout"
         android:text="Check Out"
+        android:textColor="@color/cardview_light_background"
         android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

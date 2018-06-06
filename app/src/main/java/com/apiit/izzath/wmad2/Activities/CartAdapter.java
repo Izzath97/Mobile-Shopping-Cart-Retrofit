@@ -62,6 +62,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
                 product.setQuantity(quantity);
                 product.save();
                 cc.setQuantity(0);
+                cc.setTotal(0);
                 cc.save();
             }
         });

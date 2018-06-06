@@ -30,12 +30,12 @@ public class default_home extends Fragment {
     public static final String women1 = "10" ;
     private   List<Product> product;
 
-String tts;
+    String tts;
     int mNumOfTabs;
     private TabWidget ttb;
     private TabItem all, men, women;
     private RecyclerView recyclerView;
-   private  RecyclerView.Adapter adapter;
+    private  RecyclerView.Adapter adapter;
 
     Button test;
     private List<Product> storeMen=new ArrayList<>();
@@ -102,7 +102,6 @@ String tts;
         super.onViewCreated(view, savedInstanceState);
         getActivity().setTitle("Style Omega");
 
-     //   TabHost tabHost = getTabHost();
 
     }
 

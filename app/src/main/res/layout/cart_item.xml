@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="90dp">
+    android:layout_height="130dp">
 
     <android.support.v7.widget.CardView
         android:id="@+id/cardview2"
@@ -12,6 +12,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
         android:clickable="true"
         android:foreground="?android:attr/selectableItemBackground">
 
@@ -68,32 +69,39 @@
                     app:layout_constraintStart_toEndOf="@+id/cartImage"
                     app:layout_constraintTop_toTopOf="parent" />
 
+                <TextView
+                    android:id="@+id/cartdescription"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="6dp"
+                    android:layout_marginStart="6dp"
+                    android:layout_marginTop="6dp"
+                    android:text="TextView" />
+
                 <LinearLayout
+                    android:id="@+id/lview3"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="horizontal">
 
-                    <TextView
-                        android:id="@+id/cartdescription"
-                        android:layout_width="match_parent"
+
+                    <Space
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="0dp"
-                        android:layout_marginEnd="0dp"
-                        android:layout_marginStart="0dp"
-                        android:layout_marginTop="0dp"
-                        android:layout_weight="2"
-                        android:text="TextView"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toEndOf="@+id/cartprice"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        android:layout_weight="150" />
 
                     <Button
                         android:id="@+id/delete"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="3"
-                        android:text="Button" />
+                        android:layout_width="63dp"
+                        android:layout_height="34dp"
+                        android:layout_marginBottom="6dp"
+                        android:layout_marginStart="6dp"
+                        android:backgroundTint="?attr/colorError"
+                        android:fontFamily="sans-serif"
+                        android:text="Remove"
+                        android:textAllCaps="false"
+                        android:textColor="@color/cardview_light_background"
+                        android:textSize="10sp" />
 
                 </LinearLayout>
 

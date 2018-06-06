@@ -12,6 +12,15 @@ Product product;
 Long user;
 String status;
 int quantity;
+double total;
+
+    public void setTotal(double total) {
+        this.total = total;
+    }
+
+    public double getTotal() {
+        return total;
+    }
 
     public String getStatus() {
         return status;
@@ -54,12 +63,16 @@ int quantity;
     }
 
 
-    public Cart(Register register, Product product, Long user,int quantity,String status) {
+
+
+    public Cart(Register register, Product product, Long user, int quantity, String status,double total) {
         this.register = register;
         this.product = product;
+
         this.user=user;
         this.quantity = quantity;
         this.status=status;
+        this.total = total;
     }
 
     public Cart() {

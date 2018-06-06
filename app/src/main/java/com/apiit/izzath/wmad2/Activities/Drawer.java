@@ -20,6 +20,7 @@ import com.apiit.izzath.wmad2.Fragments.AddCart;
 import com.apiit.izzath.wmad2.Fragments.Checkout;
 import com.apiit.izzath.wmad2.Fragments.ManageAccounts;
 import com.apiit.izzath.wmad2.Fragments.Profile;
+import com.apiit.izzath.wmad2.Fragments.PurchaseHistory;
 import com.apiit.izzath.wmad2.Fragments.default_home;
 import com.apiit.izzath.wmad2.Models.Product;
 import com.apiit.izzath.wmad2.R;
@@ -34,7 +35,7 @@ public class Drawer extends AppCompatActivity
     ArrayList<String> productlist = new ArrayList<>();
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
-
+    Fragment fragment=null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,19 +61,28 @@ public class Drawer extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
     }
 
+
+    public void home(){
+        Fragment fragment=new default_home();
+        FragmentManager fm=getSupportFragmentManager();
+        fm.beginTransaction().replace(R.id.aaa,fragment).commit();
+
+
+    }
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-            super.onBackPressed();
+            if( fragment instanceof default_home){
+                super.onBackPressed();
+            }
+            else {
+               home();
+            }
+
         }
-
-        Fragment fragment=new default_home();
-        FragmentManager fm=getSupportFragmentManager();
-        fm.beginTransaction().replace(R.id.aaa,fragment).commit();
-
 
 
 
@@ -81,9 +91,7 @@ public class Drawer extends AppCompatActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
          getMenuInflater().inflate(R.menu.search,menu);
-    //  getMenuInflater().inflate(R.menu.navigation_search, menu);
-   //  final MenuItem mm=menu.findItem(R.id.search);
-    // searchView=(SearchView)mm.getActionView();
+
 
 
 
@@ -131,12 +139,12 @@ public class Drawer extends AppCompatActivity
         if (id == R.id.home) {
             fragment= new default_home();
             Toast.makeText(this, "Home", Toast.LENGTH_SHORT).show();
-            // Handle the camera action
+
         }
         else if (id == R.id.account) {
             fragment= new Profile();
             Toast.makeText(this, "Profile", Toast.LENGTH_SHORT).show();
-            // Handle the camera action
+
         } else if (id == R.id.addcart) {
             Toast.makeText(this, "Cart View", Toast.LENGTH_SHORT).show();
             fragment= new AddCart();
@@ -145,7 +153,7 @@ public class Drawer extends AppCompatActivity
         else if (id == R.id.account) {
             fragment= new Profile();
             Toast.makeText(this, "CheckOut", Toast.LENGTH_SHORT).show();
-            // Handle the camera action
+
         }else if (id == R.id.inquire) {
              fragment=new Checkout();
 
@@ -156,6 +164,12 @@ public class Drawer extends AppCompatActivity
 
 
     }
+        else if (id == R.id.purchase) {
+            fragment=new PurchaseHistory();
+            setTitle("Purchase History");
+
+
+        }
         else if (id == R.id.logout) {
             SharedPreferences sp =this.getApplicationContext().getSharedPreferences(login.MyPREFERENCES, Context.MODE_PRIVATE);
             SharedPreferences.Editor editor = sp.edit();
@@ -165,6 +179,7 @@ public class Drawer extends AppCompatActivity
 
         } else if (id == R.id.settings) {
             fragment=new ManageAccounts();
+            setTitle("Settings");
         }
         if(fragment!=null){
 
