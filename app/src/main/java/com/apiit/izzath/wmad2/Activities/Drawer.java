@@ -145,39 +145,38 @@ public class Drawer extends AppCompatActivity
             fragment= new Profile();
             Toast.makeText(this, "Profile", Toast.LENGTH_SHORT).show();
 
-        } else if (id == R.id.addcart) {
-            Toast.makeText(this, "Cart View", Toast.LENGTH_SHORT).show();
+        }
+        else if (id == R.id.addcart) {
             fragment= new AddCart();
-
-        }
-        else if (id == R.id.account) {
-            fragment= new Profile();
-            Toast.makeText(this, "CheckOut", Toast.LENGTH_SHORT).show();
-
-        }else if (id == R.id.inquire) {
-             fragment=new Checkout();
+            Toast.makeText(this, "Cart Details", Toast.LENGTH_SHORT).show();
 
 
         }
-    else if (id == R.id.checkout) {
-        fragment=new Checkout();
+        else if (id == R.id.inquire) {
+                 fragment=new Checkout();
 
 
-    }
+        }
+        else if (id == R.id.checkout) {
+            fragment=new Checkout();
+            setTitle("Checkout");
+
+        }
         else if (id == R.id.purchase) {
-            fragment=new PurchaseHistory();
-            setTitle("Purchase History");
-
+                fragment=new PurchaseHistory();
+                setTitle("Purchase History");
+                Toast.makeText(this, "Purchase history", Toast.LENGTH_SHORT).show();
 
         }
         else if (id == R.id.logout) {
             SharedPreferences sp =this.getApplicationContext().getSharedPreferences(login.MyPREFERENCES, Context.MODE_PRIVATE);
             SharedPreferences.Editor editor = sp.edit();
             editor.clear();
-          finish();
+            finish();
            // Toast.makeText(this, "x=dilrukshi", Toast.LENGTH_SHORT).show();
 
-        } else if (id == R.id.settings) {
+        }
+        else if (id == R.id.settings) {
             fragment=new ManageAccounts();
             setTitle("Settings");
         }

@@ -14,7 +14,6 @@ import android.widget.TextView;
 import com.apiit.izzath.wmad2.Activities.login;
 import com.apiit.izzath.wmad2.Models.Cart;
 import com.apiit.izzath.wmad2.Models.Purchase;
-import com.apiit.izzath.wmad2.Models.Reviews;
 import com.apiit.izzath.wmad2.R;
 
 import java.util.Calendar;
@@ -51,8 +50,6 @@ Button buy;
         txtprice=(TextView)view.findViewById(R.id.allprice);
         txtprice.setText("Rs :"+ String.valueOf(price));
         txtquantity.setText("Total Items :"+String.valueOf(quantity));
-        List<Reviews> reviews=Reviews.listAll(Reviews.class);
-        List<Reviews> reviews1=Reviews.listAll(Reviews.class);
         buy=(Button)view.findViewById(R.id.pay);
         buy.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -68,7 +65,7 @@ Button buy;
                     purchase.setCart(cart);
                     purchase.save();
                    //asda
-                    List<Purchase> pp=Purchase.listAll(Purchase.class);
+
                     List<Purchase> pp2=Purchase.listAll(Purchase.class);
 
                 }

@@ -1,11 +1,12 @@
 package com.apiit.izzath.wmad2.Activities;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -44,34 +45,38 @@ private Context context;
        
     }
 
+    @SuppressLint("ResourceAsColor")
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
 
         final Product product=listitem.get(position);
         holder.cat.setText(product.getName());
         holder.dec.setText(product.getShortDescription());
-     //   holder.price.setText(product.getQuantity());
+
         Picasso.get().load(product.getScaledImage()).into(holder.img);
-      //  holder.price.setText(((String) product.getPrice()));
+
         holder.price.setText("Rs: "+Double.toString(product.getPrice()));
-       // holder.quantity.setText(product.getQuantity());
+        if(product.getQuantity()==0){
+            product.setActive(false);
+        }
+        if(product.isActive()){
+            holder.status.setText("Available");
+            holder.status.setTextColor(ContextCompat.getColor(context,R.color.green));
+        }
+        else{
+            holder.status.setText("Unavilable");
+            holder.status.setTextColor(ContextCompat.getColor(context,R.color.colorAccent));
+
+        }
+
 
 
         //set click listneer
-holder.cardview.setOnClickListener(new View.OnClickListener() {
+        holder.cardview.setOnClickListener(new View.OnClickListener() {
     @Override
     public void onClick(View view) {
-
-
         Long ee=product.getId();
-        String name=product.getName();
-        Intent intent=new Intent(context,testing.class);
-
-
         Bundle bundle = new Bundle();
-       // context.startActivity(intent);
-      //  bundle.putString("Name12",product.getName());
-      //  bundle.putString("ppname",product.getShortDescription());
         bundle.putLong("productid",ee);
         Fragment fragment=new detailScreen();
         FragmentManager fm=((FragmentActivity)context).getSupportFragmentManager();
@@ -88,11 +93,10 @@ holder.cardview.setOnClickListener(new View.OnClickListener() {
     public int getItemCount() {
         return listitem.size();
     }
-
     public class ViewHolder extends RecyclerView.ViewHolder{
     public ImageView img;
     public TextView price,dec,quantity;
-    public TextView cat;
+    public TextView cat,status;
     CardView cardview;
 
         public ViewHolder(View itemView) {
@@ -102,7 +106,7 @@ holder.cardview.setOnClickListener(new View.OnClickListener() {
             dec=(TextView)itemView.findViewById(R.id.description);
             price=(TextView)itemView.findViewById(R.id.price);
             cardview=(CardView)itemView.findViewById(R.id.cardview1);
-         //   quantity=(TextView)itemView.findViewById(R.id.quantity);
+            status=(TextView)itemView.findViewById(R.id.status);
 
         }
     }

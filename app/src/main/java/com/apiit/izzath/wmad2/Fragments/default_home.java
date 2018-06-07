@@ -14,7 +14,6 @@ import android.widget.TabWidget;
 
 import com.apiit.izzath.wmad2.Activities.adapter;
 import com.apiit.izzath.wmad2.Models.Product;
-import com.apiit.izzath.wmad2.Models.TagProduct;
 import com.apiit.izzath.wmad2.R;
 
 import java.util.ArrayList;
@@ -30,8 +29,7 @@ public class default_home extends Fragment {
     public static final String women1 = "10" ;
     private   List<Product> product;
 
-    String tts;
-    int mNumOfTabs;
+
     private TabWidget ttb;
     private TabItem all, men, women;
     private RecyclerView recyclerView;
@@ -53,8 +51,6 @@ public class default_home extends Fragment {
         men = (TabItem) view.findViewById(R.id.men);
         women = (TabItem) view.findViewById(R.id.women);
 
-        //  List<TagProduct> prodd  = TagProduct.findWithQuery(TagProduct.class, "Select product from TagProduct where tag = ?",men1);
-        //ttb=(TabWidget)view.findViewById(R.id.tabwid);
 
         test=(Button)view.findViewById(R.id.test);
 
@@ -62,11 +58,7 @@ public class default_home extends Fragment {
         recyclerView = (RecyclerView) view.findViewById(R.id.recycleView);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-//adapter =new adapter(products,getContext());
-
-
-//product=products;
-
+/*
         test.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -86,14 +78,12 @@ public class default_home extends Fragment {
               //  adapter.notifyDataSetChanged();
             }
         });
+        */
         product=products;
         adapter = new adapter(product, getContext());
         adapter.notifyDataSetChanged();
         recyclerView.setAdapter(adapter);
-
-
         return view;
-
     }
 
 
@@ -101,8 +91,6 @@ public class default_home extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         getActivity().setTitle("Style Omega");
-
-
     }
 
 

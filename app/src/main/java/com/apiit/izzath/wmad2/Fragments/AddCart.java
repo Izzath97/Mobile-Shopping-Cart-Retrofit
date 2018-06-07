@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.apiit.izzath.wmad2.Activities.CartAdapter;
 import com.apiit.izzath.wmad2.Activities.login;
@@ -28,7 +29,9 @@ public class AddCart extends Fragment {
     private RecyclerView cartView;
     private RecyclerView.Adapter card;
     private Button checkout;
-    private final int price=0;
+    TextView txtquantity,txtprice;
+    private   double price;
+    private int quantity;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -38,15 +41,29 @@ public class AddCart extends Fragment {
         cartView = (RecyclerView)view.findViewById(R.id.cartview);
         cartView.setHasFixedSize(true);
         cartView.setLayoutManager(new LinearLayoutManager(getContext()));
-        //List<Cart> cart=Cart.listAll(Cart.class);
         SharedPreferences sp= getActivity().getSharedPreferences(login.MyPREFERENCES, Context.MODE_PRIVATE);
         Long id=sp.getLong("id",10);
         List<Cart> car= Cart.findWithQuery(Cart.class, "Select * from Cart where user = ? and status = ? ", id.toString(),"Pending");
-
         card = new CartAdapter( car,getContext() );
         cartView.setAdapter(card);
 
 
+
+        final List<Cart> cartlist= Cart.findWithQuery(Cart.class, "Select * from Cart where user = ? and status = ? ", id.toString(),"Pending");
+
+        for (Cart cart:cartlist) {
+            double prices= ( (cart.getProduct().getPrice())*(cart.getQuantity()) );
+            price=price+prices;
+            quantity=quantity+cart.getQuantity();
+
+
+
+        }
+
+        txtquantity=(TextView)view.findViewById(R.id.allquantity);
+        txtprice=(TextView)view.findViewById(R.id.allprice);
+        txtprice.setText("Rs :"+ String.valueOf(price));
+        txtquantity.setText("Total Items :"+String.valueOf(quantity));
 
         checkout.setOnClickListener(new View.OnClickListener() {
             @Override

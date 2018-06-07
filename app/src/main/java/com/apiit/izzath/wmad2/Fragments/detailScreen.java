@@ -26,7 +26,6 @@ import com.apiit.izzath.wmad2.Models.Reviews;
 import com.apiit.izzath.wmad2.R;
 import com.squareup.picasso.Picasso;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -41,8 +40,8 @@ public class detailScreen extends Fragment {
     Button bcomment;
     float value;
     Register user;
-    Product productss;
-    ArrayList<Reviews> reviews=new ArrayList<Reviews>();
+    Product products;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -52,12 +51,13 @@ public class detailScreen extends Fragment {
         id=productid1;
         if (bundles != null) {
 
-            ImageView img=(ImageView)view.findViewById(R.id.imageView7);
             final Product product=Product.findById(Product.class,productid1);
-            productss=product;}
-        Button cart=(Button)view.findViewById(R.id.cart);
-        Button buy=(Button)view.findViewById(R.id.buy);
-        Button share=(Button)view.findViewById(R.id.button2);
+            products=product;
+        }
+
+        Button cart=(Button)view.findViewById(R.id.cart);       // Add to Cart Button
+        Button buy=(Button)view.findViewById(R.id.buy);         //Wish List Button
+        Button share=(Button)view.findViewById(R.id.button2);   //Share Button
         testing=(TextView)view.findViewById(R.id.name);
         price=(TextView)view.findViewById(R.id.price);
         quantityview=(TextView)view.findViewById(R.id.qname);
@@ -68,20 +68,9 @@ public class detailScreen extends Fragment {
         bcomment=(Button)view.findViewById(R.id.bcomment);
         rb=(RatingBar)view.findViewById(R.id.ratingBar);
 
-        ListView listview=(ListView)view.findViewById(R.id.reviewview);
-        SharedPreferences sp = getActivity().getSharedPreferences(login.MyPREFERENCES, Context.MODE_PRIVATE);
-        final Long userids = sp.getLong("id", 10);
+        ListView listview=(ListView)view.findViewById(R.id.reviewview);     // ListView For view Reviews
         List<Reviews> reee=Reviews.listAll(Reviews.class);
-     //   List<Reviews> reviewsd= Reviews.findWithQuery(Reviews.class, "Select * from Reviews where user = ? and product = ? ", userid.toString(),productss.toString());
-
-        for (Reviews rv:reee
-             ) {
-            if(rv.getUser().getId().equals(userids)&&rv.getProduct().getId().equals(productss.getId())){
-                reviews.add(rv);
-
-            }
-        }
-
+        List<Reviews> reviews= Reviews.findWithQuery(Reviews.class, "Select * from Reviews where   product = ? ",products.getId().toString());
         ReviewAdapter rv=new ReviewAdapter(getContext(),reviews);
         listview.setAdapter(rv);
 
@@ -98,42 +87,39 @@ public class detailScreen extends Fragment {
                 final Long userids = sp.getLong("id", 10);
                 Register uss=Register.findById(Register.class,userids);
                 String commnt=comment.getText().toString();
-                Reviews reviews=new Reviews(uss,productss,value,commnt);
+                Reviews reviews=new Reviews(uss,products,value,commnt);
                 reviews.save();
-
             }
         });
 
-        final   Bundle bundle = this.getArguments();
 
-        final Long productid=bundle.getLong("productid");
-        id=productid;
-        if (bundle != null) {
 
-        ImageView img=(ImageView)view.findViewById(R.id.imageView7);
-       final Product product=Product.findById(Product.class,productid);
-       productss=product;
+            ImageView img=(ImageView)view.findViewById(R.id.imageView7);
+            final Product product=Product.findById(Product.class,id);
+            products=product;
             price.setText(Double.toString(product.getPrice()));
             testing.setText(product.getName());
             description.setText(product.getShortDescription());
             longDescription.setText(product.getLongDescription());
             Picasso.get().load(product.getScaledImage()).into(img);
             quantityview.setText(Integer.toString(product.getQuantity()));
-            }
 
-          cart.setOnClickListener(new View.OnClickListener() {
+
+
+
+        cart.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View view) {
             if(quantity.getText().toString().isEmpty()){
-                quantity.setError("Enter Quantity to ADD TO Cart");
-
+                    quantity.setError("Enter Quantity to ADD TO Cart");
             }
-            else {
+            else
+                {
                 Long productids = Long.valueOf(10);
                 Long cartid = Long.valueOf(10);
                 SharedPreferences sp = getActivity().getSharedPreferences(login.MyPREFERENCES, Context.MODE_PRIVATE);
                 Long userid = sp.getLong("id", 10);
-                Product products = Product.findById(Product.class, productid);          //Product Object is returned
+                Product products = Product.findById(Product.class, id);          //Product Object is returned
                 Register rg = Register.findById(Register.class, userid);
                 user=rg;//User object is returned
                 List<Cart> cart1 = Cart.listAll(Cart.class);     //List of Cart is returned
@@ -143,46 +129,36 @@ public class detailScreen extends Fragment {
                         cartid = cart.getId();
                     }
                 }
-                // Cart cca=  Cart.findById(Cart.class,productids);
-                if (products.getId().equals(productids)) {
-                    Cart cartfind = Cart.findById(Cart.class, cartid);
-                    Toast.makeText(getContext(), "The Product is Already Added to the Cart", Toast.LENGTH_SHORT).show();
-                    int quantitycart = cartfind.getQuantity();
-                    final int enterquantity = Integer.parseInt(quantity.getText().toString());
-                    // int quantity1 = Integer.parseInt(qaa);
-                    if (enterquantity <= products.getQuantity()) {
+                final int enterquantity = Integer.parseInt(quantity.getText().toString());
+                if(enterquantity <= products.getQuantity()){
+                    if (products.getId().equals(productids)) {
+                        Cart cartfind = Cart.findById(Cart.class, cartid);
+                        Toast.makeText(getContext(), "The Product Successfully Added to the Cart", Toast.LENGTH_SHORT).show();
+                        int quantitycart = cartfind.getQuantity();
                         cartfind.setQuantity(quantitycart + enterquantity);
                         cartfind.setStatus("Pending");
                         cartfind.setTotal((quantitycart + enterquantity)*products.getPrice());
                         cartfind.save();
-                        int updatequantity = ((products.getQuantity()) - (enterquantity));
-                        products.setQuantity(updatequantity);
-                        products.save();
-                    } else {
-                        quantity.setError("Invalid Quantity");
-
                     }
-                } else {
-                    int enterquantity = Integer.parseInt(quantity.getText().toString());
-                    if (enterquantity <= products.getQuantity()) {
+                    else {
                         Cart item = new Cart(rg, products, sp.getLong("id", 10), enterquantity, "Pending",(enterquantity*products.getPrice()));
                         item.save();
-                        int updatequantity = ((products.getQuantity()) - (enterquantity));
-                        products.setQuantity(updatequantity);
-                        products.save();
-                    } else {
-                        quantity.setError("Invalid Quantity");
-
+                        Toast.makeText(getContext(), "The Product Successfully Added to the Cart", Toast.LENGTH_SHORT).show();
                     }
+
+                    int updatequantity = ((products.getQuantity()) - (enterquantity));
+                    products.setQuantity(updatequantity);
+                    products.save();
 
                 }
 
+                else {
+                        quantity.setError("Invalid Quantity");
 
-                List<Cart> cc = Cart.listAll(Cart.class);
-
-            }
-    }
-});
+                    }
+                }
+        }
+        });
 
 
 
@@ -190,13 +166,11 @@ public class detailScreen extends Fragment {
         share.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 Product ll=Product.findById(Product.class,id);
                 Intent share = new Intent(Intent.ACTION_SEND);
                 share.setType("text/plain");
                 String sharing=ll.getFullImage().toString();
                 share.putExtra(Intent.EXTRA_SUBJECT, sharing);
-
                 share.putExtra(Intent.EXTRA_TEXT, sharing);
                 startActivity(Intent.createChooser(share, "Share Via"));
             }
@@ -206,19 +180,7 @@ public class detailScreen extends Fragment {
 
 
     }
-    void sss(View  view){
 
-        Product ll=Product.findById(Product.class,id);
-        Intent share = new Intent(Intent.ACTION_SEND);
-        share.setType("text/plain");
-        String sharing=ll.getShortDescription().toString();
-        share.putExtra(Intent.EXTRA_SUBJECT, sharing);
-
-        share.putExtra(Intent.EXTRA_TEXT, sharing);
-        startActivity(Intent.createChooser(share, "Share Via"));
-
-
-    }
 
 
 }

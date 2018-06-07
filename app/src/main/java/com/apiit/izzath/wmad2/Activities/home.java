@@ -14,29 +14,29 @@ import com.apiit.izzath.wmad2.R;
 import java.util.ArrayList;
 import java.util.List;
 
-public class home extends AppCompatActivity {
-    ListView mlistview;
-    TextView text;
-    private List<Product> listitems;
-    ArrayList<String> productlist = new ArrayList<>();
-    private RecyclerView recyclerView;
-    private RecyclerView.Adapter adapter;
-    Button btn;
+    public class home extends AppCompatActivity {
+        ListView mlistview;
+        TextView text;
+        private List<Product> listitems;
+        ArrayList<String> productlist = new ArrayList<>();
+        private RecyclerView recyclerView;
+        private RecyclerView.Adapter adapter;
+        Button btn;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.home);
-        recyclerView = (RecyclerView) findViewById(R.id.recycleView);
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        listitems = new ArrayList<>();
+        @Override
+        protected void onCreate(Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+            setContentView(R.layout.home);
+            recyclerView = (RecyclerView) findViewById(R.id.recycleView);
+            recyclerView.setHasFixedSize(true);
+            recyclerView.setLayoutManager(new LinearLayoutManager(this));
+            listitems = new ArrayList<>();
 
-        //comment
+            //comment
 
+
+
+        }
 
 
     }
-
-
-}

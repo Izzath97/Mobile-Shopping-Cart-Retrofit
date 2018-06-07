@@ -7,7 +7,7 @@
     <color name="darkgrey">#6c6c6c</color>
     <color name="white">#ffffff</color>
     <color name="lightgray">#D3D3D3</color>
-    <color name="green">#FF00C300</color>
+    <color name="green">#00c300</color>
     <color name="greyone">#FF5F5F5F</color>
     <color name="blueone">#0b45ce</color>
 </resources>

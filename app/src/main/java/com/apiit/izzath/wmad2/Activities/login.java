@@ -47,35 +47,35 @@ public class login extends AppCompatActivity {
 });
 
 
-login.setOnClickListener(new View.OnClickListener() {
-    @Override
-    public void onClick(View view) {
-        List<Register> regiss=Register.listAll(Register.class);
+    login.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            List<Register> regiss=Register.listAll(Register.class);
 
-        String users=etusername.getText().toString();
-        String pass=etpassword.getText().toString();
-        for (Register rg:regiss) {
-            if((users.equals(rg.getName().toString())) && (pass.equals(rg.getPassword1().toString()))) {
+            String users=etusername.getText().toString();
+            String pass=etpassword.getText().toString();
+            for (Register rg:regiss) {
+                if((users.equals(rg.getName().toString())) && (pass.equals(rg.getPassword1().toString()))) {
 
-                SharedPreferences sp =getApplicationContext().getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
-                SharedPreferences.Editor editor = sp.edit();
-                editor.putString("User",users);
-                editor.putLong("id",rg.getId());
+                    SharedPreferences sp =getApplicationContext().getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sp.edit();
+                    editor.putString("User",users);
+                    editor.putLong("id",rg.getId());
+                    editor.commit();
+                    Toast.makeText(com.apiit.izzath.wmad2.Activities.login.this, "Logged In", Toast.LENGTH_SHORT).show();
+                    // check=true;
+                    Intent login = new Intent(getApplicationContext(),Drawer.class);
+                    startActivity(login);
 
-                editor.commit();
-                Toast.makeText(com.apiit.izzath.wmad2.Activities.login.this, "Logged In", Toast.LENGTH_SHORT).show();
-                // check=true;
-                Intent login = new Intent(getApplicationContext(),Drawer.class);
-                startActivity(login);
+                }
+                else {
+
+                    //Toast.makeText(com.apiit.izzath.wmad2.Activities.login.this, "Please Try Again", Toast.LENGTH_SHORT).show();
+                }
             }
-            else {
 
-                //Toast.makeText(com.apiit.izzath.wmad2.Activities.login.this, "Please Try Again", Toast.LENGTH_SHORT).show();
-            }
         }
-
-    }
-});
+    });
 
 
     }
