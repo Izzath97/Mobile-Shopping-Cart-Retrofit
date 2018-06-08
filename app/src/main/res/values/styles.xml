@@ -7,10 +7,11 @@
         <item name="colorPrimaryDark">#808080</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
-    <style name="ratingBarStyleSmall"
-        parent="android:style/Widget.Material.RatingBar.Small">
+
+    <style name="ratingBarStyleSmall" parent="android:style/Widget.Material.RatingBar.Small">
 
     </style>
+
     <style name="AppTheme.Launcher">
         <item name="android:windowBackground">@drawable/launch_screen</item>
         <!-- Optional, on Android 5+ you can modify the colorPrimaryDark color to match the windowBackground color for further branding-->

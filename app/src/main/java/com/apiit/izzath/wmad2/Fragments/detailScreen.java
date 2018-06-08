@@ -26,6 +26,7 @@ import com.apiit.izzath.wmad2.Models.Reviews;
 import com.apiit.izzath.wmad2.R;
 import com.squareup.picasso.Picasso;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 /**
@@ -85,6 +86,11 @@ public class detailScreen extends Fragment {
             public void onClick(View view) {
                 SharedPreferences sp = getActivity().getSharedPreferences(login.MyPREFERENCES, Context.MODE_PRIVATE);
                 final Long userids = sp.getLong("id", 10);
+//                Date today=new Date();
+                SimpleDateFormat format =new SimpleDateFormat("dd-MM-yyyy hh:mm:ss a");
+               // String dd=format.format();
+
+
                 Register uss=Register.findById(Register.class,userids);
                 String commnt=comment.getText().toString();
                 Reviews reviews=new Reviews(uss,products,value,commnt);

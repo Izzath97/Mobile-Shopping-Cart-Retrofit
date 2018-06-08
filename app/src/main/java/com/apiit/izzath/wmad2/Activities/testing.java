@@ -15,7 +15,7 @@ TextView testing;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_testing);
-        testing=(TextView)findViewById(R.id.testing);
+      //  testing=(TextView)findViewById(R.id.testing);
 
         SharedPreferences sp= this.getSharedPreferences(login.MyPREFERENCES, Context.MODE_PRIVATE);
 

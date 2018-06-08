@@ -138,6 +138,7 @@ public class Drawer extends AppCompatActivity
         int id = item.getItemId();
         if (id == R.id.home) {
             fragment= new default_home();
+            setTitle("Style Omega");
             Toast.makeText(this, "Home", Toast.LENGTH_SHORT).show();
 
         }

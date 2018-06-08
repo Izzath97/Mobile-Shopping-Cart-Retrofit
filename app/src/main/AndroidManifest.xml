@@ -38,6 +38,7 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
         <activity
             android:name=".Activities.register"
@@ -52,10 +53,13 @@
             android:name=".Activities.Drawer"
             android:label="@string/title_activity_drawer"
             android:theme="@style/AppTheme" />
+        <activity android:name=".Fragments.ManageAccounts" />
+        <activity
+            android:name=".Activities.Hometab"
+            android:label="@string/title_activity_hometab"
+            android:theme="@style/AppTheme">
 
-
-
-        <activity android:name=".Fragments.ManageAccounts"></activity>
+        </activity>
     </application>
 
 </manifest>

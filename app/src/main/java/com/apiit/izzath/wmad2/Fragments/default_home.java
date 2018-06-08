@@ -1,22 +1,18 @@
 package com.apiit.izzath.wmad2.Fragments;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.design.widget.TabItem;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.TabWidget;
 
-import com.apiit.izzath.wmad2.Activities.adapter;
 import com.apiit.izzath.wmad2.Models.Product;
 import com.apiit.izzath.wmad2.R;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -27,71 +23,76 @@ public class default_home extends Fragment {
 
     public static final String men1 = "8" ;
     public static final String women1 = "10" ;
-    private   List<Product> product;
+
+    private ViewPager mViewPager;
 
 
-    private TabWidget ttb;
-    private TabItem all, men, women;
-    private RecyclerView recyclerView;
-    private  RecyclerView.Adapter adapter;
 
-    Button test;
-    private List<Product> storeMen=new ArrayList<>();
-    private List<Product> storeWomen=new ArrayList<>();
+
     private   List<Product> products = Product.listAll(Product.class);
-
+    private SectionsPagerAdapter mSectionsPagerAdapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.default_home, container, false);
 
+        mSectionsPagerAdapter = new SectionsPagerAdapter(getActivity().getSupportFragmentManager());
+        mViewPager = (ViewPager)view. findViewById(R.id.container);
+        mViewPager.setAdapter(mSectionsPagerAdapter);
+        TabLayout tabLayout = (TabLayout)view. findViewById(R.id.tabwid);
+        mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
+        tabLayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(mViewPager));
 
-        all = (TabItem) view.findViewById(R.id.all);
-        men = (TabItem) view.findViewById(R.id.men);
-        women = (TabItem) view.findViewById(R.id.women);
 
-
-        test=(Button)view.findViewById(R.id.test);
 
         // Inflate the layout for this fragment
-        recyclerView = (RecyclerView) view.findViewById(R.id.recycleView);
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-/*
-        test.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        Home home=new Home();
 
-               List<TagProduct> tag=TagProduct.findWithQuery(TagProduct.class,"Select * from TAG_PRODUCT where tag = ? ","8");
-                for (TagProduct aa:tag) {
-                    if(aa.getTag().equals(men1)){
 
-                        storeMen.add(aa.getProduct()) ;
-
-                    }
-
-                }
-
-                product=storeMen;
-               // adapter = new adapter(storeMen, getContext());
-              //  adapter.notifyDataSetChanged();
-            }
-        });
-        */
-        product=products;
-        adapter = new adapter(product, getContext());
-        adapter.notifyDataSetChanged();
-        recyclerView.setAdapter(adapter);
         return view;
     }
 
 
-    @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        getActivity().setTitle("Style Omega");
+
+
+
+
+    public class SectionsPagerAdapter extends FragmentPagerAdapter {
+
+        public SectionsPagerAdapter(FragmentManager fm) {
+            super(fm);
+        }
+
+        @Override
+        public Fragment getItem(int position) {
+
+            switch (position){
+                case 0:
+                    Home home=new Home();
+                    return  home;
+                case 1:
+                    MenHome ad1=new MenHome();
+                    return  ad1;
+                case 2:
+                    WomenHome ad2=new WomenHome();
+                    return  ad2;
+                default:
+                    Home homes=new Home();
+                    return  homes;
+
+
+            }
+
+        }
+
+        @Override
+        public int getCount() {
+            // Show 3 total pages.
+            return 3;
+        }
     }
+
 
 
 }
