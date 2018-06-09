@@ -5,51 +5,99 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <ListView
-        android:id="@+id/listView"
-        android:layout_width="368dp"
-        android:layout_height="385dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/pay"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
         android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
-        android:text="Buy"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.672"
-        app:layout_constraintStart_toEndOf="@+id/allprice"
-        app:layout_constraintTop_toBottomOf="@+id/listView" />
-
-    <TextView
-        android:id="@+id/allprice"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginStart="60dp"
         android:layout_marginTop="8dp"
-        android:text="TextView"
+        android:layout_margin="@dimen/default_gap"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/allquantity" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.249"
+        tools:layout_editor_absoluteX="0dp">
 
-    <TextView
-        android:id="@+id/allquantity"
-        android:layout_width="wrap_content"
-        android:layout_height="24dp"
-        android:layout_marginStart="60dp"
-        android:layout_marginTop="48dp"
-        android:text="TextView"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/listView" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/textView6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="37dp"
+                android:layout_marginTop="33dp"
+                android:text="Customer Name"
+                tools:layout_editor_absoluteX="252dp"
+                tools:layout_editor_absoluteY="52dp" />
+
+            <TextView
+                android:id="@+id/textView9"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignStart="@+id/textView6"
+                android:layout_below="@+id/textView6"
+                android:layout_marginTop="30dp"
+                android:text="Billing Address"
+                tools:layout_editor_absoluteX="285dp"
+                tools:layout_editor_absoluteY="103dp" />
+
+            <TextView
+                android:id="@+id/allprice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/allquantity"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="20dp"
+                android:text="TextView"
+                tools:layout_editor_absoluteX="318dp"
+                tools:layout_editor_absoluteY="169dp" />
+
+            <TextView
+                android:id="@+id/allquantity"
+                android:layout_width="wrap_content"
+                android:layout_height="24dp"
+                android:layout_alignParentBottom="true"
+                android:layout_alignStart="@+id/textView9"
+                android:layout_marginBottom="20dp"
+                android:text="TextView"
+                tools:layout_editor_absoluteX="8dp"
+                tools:layout_editor_absoluteY="133dp" />
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_margin="@dimen/default_gap"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.738"
+        tools:layout_editor_absoluteX="8dp">
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <Button
+                android:id="@+id/pay"
+                android:layout_width="327dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/loginbutton"
+                android:text="Buy"
+                android:textColor="@color/cardview_light_background"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </android.support.constraint.ConstraintLayout>
+    </android.support.v7.widget.CardView>
+
 </android.support.constraint.ConstraintLayout>
