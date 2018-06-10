@@ -4,41 +4,44 @@
     tools:showIn="navigation_view">
 
     <group android:checkableBehavior="single">
-        <item android:id="@+id/home" android:title="Home" android:icon="@drawable/manage_account"/>
+        <item android:id="@+id/home" android:title="Home" android:icon="@drawable/home"/>
 
         <item
             android:id="@+id/cata"
+            android:icon="@drawable/four_black_squares"
             android:title="Catagories" />
+
         <item android:id="@+id/account" android:title="Profile" android:icon="@drawable/profile"/>
         <item android:id="@+id/addcart" android:title="Cart View" android:icon="@drawable/add_cart"/>
 
         <item
             android:id="@+id/wish"
-            android:icon="@drawable/contact"
+            android:icon="@drawable/heart"
             android:title="Wish List" />
-        <item android:id="@+id/purchase" android:title="Purchased Items" android:icon="@drawable/contact"/>
+        <item android:id="@+id/purchase" android:title="Purchased Items" android:icon="@drawable/cart"/>
 
 
 
 
     </group>
 <group></group>
-    <item android:title="Communicate">
+    <item android:title="Settings">
         <menu>
 
 
             <item
                 android:id="@+id/settings"
-                android:icon="@drawable/ic_menu_share"
+                android:icon="@drawable/settings_gears"
                 android:title="Settings" />
 
         </menu>
     </item>
-    <item android:title="Communicate">
+    <item android:title="">
         <menu>
 
             <item
                 android:id="@+id/logout"
+                android:icon="@drawable/logout"
                 android:title="Log Out" />
 
 
