@@ -21,7 +21,7 @@
             android:layout_height="match_parent">
 
             <TextView
-                android:id="@+id/textView6"
+                android:id="@+id/name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
@@ -33,11 +33,11 @@
                 tools:layout_editor_absoluteY="52dp" />
 
             <TextView
-                android:id="@+id/textView9"
+                android:id="@+id/email"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignStart="@+id/textView6"
-                android:layout_below="@+id/textView6"
+                android:layout_alignStart="@+id/name"
+                android:layout_below="@+id/name"
                 android:layout_marginTop="30dp"
                 android:text="Billing Address"
                 tools:layout_editor_absoluteX="285dp"
@@ -47,7 +47,7 @@
                 android:id="@+id/allprice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignBottom="@+id/allquantity"
+                android:layout_alignBottom="@+id/cartname"
                 android:layout_alignParentEnd="true"
                 android:layout_marginEnd="20dp"
                 android:text="TextView"
@@ -55,11 +55,11 @@
                 tools:layout_editor_absoluteY="169dp" />
 
             <TextView
-                android:id="@+id/allquantity"
+                android:id="@+id/cartname"
                 android:layout_width="wrap_content"
                 android:layout_height="24dp"
                 android:layout_alignParentBottom="true"
-                android:layout_alignStart="@+id/textView9"
+                android:layout_alignStart="@+id/email"
                 android:layout_marginBottom="20dp"
                 android:text="TextView"
                 tools:layout_editor_absoluteX="8dp"

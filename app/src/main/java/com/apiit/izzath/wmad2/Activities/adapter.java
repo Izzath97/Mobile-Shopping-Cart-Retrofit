@@ -52,9 +52,7 @@ private Context context;
         final Product product=listitem.get(position);
         holder.cat.setText(product.getName());
         holder.dec.setText(product.getShortDescription());
-
         Picasso.get().load(product.getScaledImage()).into(holder.img);
-
         holder.price.setText("Rs: "+Double.toString(product.getPrice()));
         if(product.getQuantity()==0){
             product.setActive(false);

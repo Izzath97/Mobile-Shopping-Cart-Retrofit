@@ -86,7 +86,7 @@ public void cc(View view){}
                 password2.setError("Please Enter a Valid Password");
                 valid=false;
             }
-            if(Remail.isEmpty()|| Patterns.EMAIL_ADDRESS.matcher(Remail).matches()){
+            if(Remail.isEmpty()|| Patterns.EMAIL_ADDRESS.matcher(Remail).equals(true)){
                 email.setError("Please Enter a Valid Email Address");
                 valid=false;
             }

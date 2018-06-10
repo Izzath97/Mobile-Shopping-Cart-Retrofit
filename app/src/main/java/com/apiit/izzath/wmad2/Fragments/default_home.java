@@ -47,16 +47,10 @@ public class default_home extends Fragment {
 
 
         // Inflate the layout for this fragment
-        Home home=new Home();
 
 
         return view;
     }
-
-
-
-
-
 
     public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
@@ -78,8 +72,8 @@ public class default_home extends Fragment {
                     WomenHome ad2=new WomenHome();
                     return  ad2;
                 default:
-                    Home homes=new Home();
-                    return  homes;
+
+                    return  null;
 
 
             }

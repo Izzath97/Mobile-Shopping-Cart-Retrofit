@@ -1,8 +1,10 @@
 package com.apiit.izzath.wmad2.Fragments;
 
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,12 +20,12 @@ import java.util.List;
  * Created by Izzath on 4/25/2018.
  */
 
-public class Home extends android.support.v4.app.Fragment{
+public class Home extends Fragment {
 
     ArrayList<String> productlist = new ArrayList<>();
     private RecyclerView recyclerView;
     private  RecyclerView.Adapter adapters;
-
+    private SearchView searchView;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -42,7 +44,6 @@ public class Home extends android.support.v4.app.Fragment{
 
 return  view;
          }
-
 
 
 }

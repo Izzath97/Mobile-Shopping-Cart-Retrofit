@@ -1,6 +1,7 @@
 package com.apiit.izzath.wmad2.Activities;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -18,12 +19,14 @@ import android.widget.Toast;
 
 import com.apiit.izzath.wmad2.Fragments.AddCart;
 import com.apiit.izzath.wmad2.Fragments.Checkout;
+import com.apiit.izzath.wmad2.Fragments.Home;
 import com.apiit.izzath.wmad2.Fragments.ManageAccounts;
 import com.apiit.izzath.wmad2.Fragments.Profile;
 import com.apiit.izzath.wmad2.Fragments.PurchaseHistory;
 import com.apiit.izzath.wmad2.Fragments.default_home;
 import com.apiit.izzath.wmad2.Models.Product;
 import com.apiit.izzath.wmad2.R;
+import com.apiit.izzath.wmad2.grid.home1;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,7 +43,7 @@ public class Drawer extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_drawer);
-        Fragment fragment=new default_home();
+        Fragment fragment=new Home();
         FragmentManager fm=getSupportFragmentManager();
         fm.beginTransaction().replace(R.id.aaa,fragment).commit();
 
@@ -63,7 +66,7 @@ public class Drawer extends AppCompatActivity
 
 
     public void home(){
-        Fragment fragment=new default_home();
+        Fragment fragment=new Home();
         FragmentManager fm=getSupportFragmentManager();
         fm.beginTransaction().replace(R.id.aaa,fragment).commit();
 
@@ -75,30 +78,19 @@ public class Drawer extends AppCompatActivity
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-            if( fragment instanceof default_home){
+            if( fragment instanceof Home){
                 super.onBackPressed();
             }
             else {
                home();
             }
-
         }
-
-
-
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-         getMenuInflater().inflate(R.menu.search,menu);
-
-
-
-
-
+        getMenuInflater().inflate(R.menu.search,menu);
         return true;
-
-
 
         }
     private List<Product> filter(List<Product> p1,String query){
@@ -123,7 +115,7 @@ public class Drawer extends AppCompatActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.search) {
             return true;
         }
 
@@ -136,25 +128,35 @@ public class Drawer extends AppCompatActivity
         // Handle navigation view item clicks here.
         Fragment fragment=null;
         int id = item.getItemId();
+
         if (id == R.id.home) {
-            fragment= new default_home();
+             fragment=new Home();
+            FragmentManager fm=getSupportFragmentManager();
+            fm.beginTransaction().replace(R.id.aaa,fragment).commit();
+
             setTitle("Style Omega");
             Toast.makeText(this, "Home", Toast.LENGTH_SHORT).show();
 
         }
+        else if (id == R.id.cata) {
+            fragment= new default_home();
+            Toast.makeText(this, "Profile", Toast.LENGTH_SHORT).show();
+            setTitle("Style Omega");
+        }
         else if (id == R.id.account) {
             fragment= new Profile();
             Toast.makeText(this, "Profile", Toast.LENGTH_SHORT).show();
-
+            setTitle("Profile");
         }
         else if (id == R.id.addcart) {
             fragment= new AddCart();
             Toast.makeText(this, "Cart Details", Toast.LENGTH_SHORT).show();
-
+            setTitle("Orders");
 
         }
-        else if (id == R.id.inquire) {
-                 fragment=new Checkout();
+        else if (id == R.id.wish) {
+                 fragment=new home1();
+            setTitle("Favorites");
 
 
         }
@@ -174,6 +176,8 @@ public class Drawer extends AppCompatActivity
             SharedPreferences.Editor editor = sp.edit();
             editor.clear();
             finish();
+            Intent intent=new Intent(Drawer.this,login.class);
+            startActivity(intent);
            // Toast.makeText(this, "x=dilrukshi", Toast.LENGTH_SHORT).show();
 
         }

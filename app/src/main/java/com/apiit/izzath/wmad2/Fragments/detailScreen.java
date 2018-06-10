@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +21,7 @@ import android.widget.Toast;
 import com.apiit.izzath.wmad2.Activities.ReviewAdapter;
 import com.apiit.izzath.wmad2.Activities.login;
 import com.apiit.izzath.wmad2.Models.Cart;
+import com.apiit.izzath.wmad2.Models.Favorites;
 import com.apiit.izzath.wmad2.Models.Product;
 import com.apiit.izzath.wmad2.Models.Register;
 import com.apiit.izzath.wmad2.Models.Reviews;
@@ -48,21 +50,27 @@ public class detailScreen extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view=inflater.inflate(R.layout.detail_product, container, false);
         final   Bundle bundles = this.getArguments();
+        Button cart=(Button)view.findViewById(R.id.cart);
         final Long productid1=bundles.getLong("productid");
         id=productid1;
         if (bundles != null) {
 
             final Product product=Product.findById(Product.class,productid1);
             products=product;
+            if(product.isActive()==false){
+                cart.setBackgroundColor(ContextCompat.getColor(getActivity(),R.color.colorAccent));
+                cart.setEnabled(false);
+
+            }
         }
 
-        Button cart=(Button)view.findViewById(R.id.cart);       // Add to Cart Button
-        Button buy=(Button)view.findViewById(R.id.buy);         //Wish List Button
+        // Add to Cart Button
+        Button wish=(Button)view.findViewById(R.id.wish);         //Wish List Button
         Button share=(Button)view.findViewById(R.id.button2);   //Share Button
         testing=(TextView)view.findViewById(R.id.name);
         price=(TextView)view.findViewById(R.id.price);
         quantityview=(TextView)view.findViewById(R.id.qname);
-        quantity=(EditText)view.findViewById(R.id.allquantity);
+        quantity=(EditText)view.findViewById(R.id.cartname);
         description=(TextView)view.findViewById(R.id.description);
         longDescription =(TextView)view.findViewById(R.id.longDescription);
         comment=(EditText)view.findViewById(R.id.comment);
@@ -72,7 +80,7 @@ public class detailScreen extends Fragment {
         ListView listview=(ListView)view.findViewById(R.id.reviewview);     // ListView For view Reviews
         List<Reviews> reee=Reviews.listAll(Reviews.class);
         List<Reviews> reviews= Reviews.findWithQuery(Reviews.class, "Select * from Reviews where   product = ? ",products.getId().toString());
-        ReviewAdapter rv=new ReviewAdapter(getContext(),reviews);
+        final ReviewAdapter rv=new ReviewAdapter(getContext(),reviews);
         listview.setAdapter(rv);
 
         rb.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
@@ -86,19 +94,44 @@ public class detailScreen extends Fragment {
             public void onClick(View view) {
                 SharedPreferences sp = getActivity().getSharedPreferences(login.MyPREFERENCES, Context.MODE_PRIVATE);
                 final Long userids = sp.getLong("id", 10);
-//                Date today=new Date();
+
                 SimpleDateFormat format =new SimpleDateFormat("dd-MM-yyyy hh:mm:ss a");
-               // String dd=format.format();
-
-
                 Register uss=Register.findById(Register.class,userids);
                 String commnt=comment.getText().toString();
                 Reviews reviews=new Reviews(uss,products,value,commnt);
                 reviews.save();
+                rv.notifyDataSetChanged();
+
             }
         });
 
+            wish.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Boolean check=false;
+                    SharedPreferences sp = getActivity().getSharedPreferences(login.MyPREFERENCES, Context.MODE_PRIVATE);
+                    final Long userids = sp.getLong("id", 10);
+                    Register uss=Register.findById(Register.class,userids);
+                   List <Favorites> fav=Favorites.listAll(Favorites.class);
+                    for (Favorites fa:fav
+                         ) {
+                      if(  fa.getProduct().getId().equals(products.getId())&&fa.getUser().getId().equals(userids)){
+                          check=true;
 
+                      }
+                    }
+                    if(check.equals(true)){
+                        Toast.makeText(getContext(), "The Product is already Added to Favorites", Toast.LENGTH_SHORT).show();
+                    }
+                    else if (check==false){
+                        Favorites favorites=new Favorites();
+                        favorites.setProduct(products);
+                        favorites.setUser(uss);
+                        favorites.save();
+                    }
+
+                }
+            });
 
             ImageView img=(ImageView)view.findViewById(R.id.imageView7);
             final Product product=Product.findById(Product.class,id);

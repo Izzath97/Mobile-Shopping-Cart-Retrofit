@@ -42,33 +42,30 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
-        final Cart cc = cart.get(position);
-        //holder.cat.setText(cc.getProduct().getShortDescription());
-        holder.quantity.setText(cc.getProduct().getShortDescription());
-        //   holder.price.setText(product.getQuantity());
-        Picasso.get().load(cc.getProduct().getScaledImage()).into(holder.img);
-        //  holder.price.setText(((String) product.getPrice()));
-        holder.price.setText("Rs: " + Double.toString(cc.getProduct().getPrice()));
-        holder.qan.setText("Quantity : "+Integer.toString(cc.getQuantity()));
+    public void onBindViewHolder(final ViewHolder holder, int position) {
+        final Cart carts = cart.get(position);
+
+        holder.name.setText(carts.getProduct().getShortDescription());
+        Picasso.get().load(carts.getProduct().getScaledImage()).into(holder.img);
+        holder.price.setText("Rs: " + Double.toString(carts.getProduct().getPrice()));
+        holder.quantity.setText("Quantity : "+Integer.toString(carts.getQuantity()));
+
         holder.delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                cc.setStatus("Canceled");
-
-
-                Product product=Product.findById(Product.class,cc.getProduct().getId());
-                int quantity=cc.getQuantity()+product.getQuantity();
+                carts.setStatus("Canceled");
+                Product product=Product.findById(Product.class,carts.getProduct().getId());
+                int quantity=carts.getQuantity()+product.getQuantity();
                 product.setQuantity(quantity);
                 product.save();
-                cc.setQuantity(0);
-                cc.setTotal(0);
-                cc.save();
+                carts.setQuantity(0);
+                carts.setTotal(0);
+                carts.save();
+
             }
         });
+
     }
-
-
 
         @Override
     public int getItemCount() {
@@ -76,7 +73,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
     }
     public class ViewHolder extends RecyclerView.ViewHolder{
         public ImageView img;
-        public TextView price,quantity,qan;
+        public TextView price,quantity,name;
         public Button delete;
 
         CardView cardview;
@@ -84,9 +81,9 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
         public ViewHolder(View itemView) {
             super(itemView);
             img=(ImageView)itemView.findViewById(R.id.cartImage);
-            qan=(TextView)itemView.findViewById(R.id.allquantity);
-            quantity=(TextView)itemView.findViewById(R.id.cartprice) ;
-            price=(TextView)itemView.findViewById(R.id.cartprice);
+            name=(TextView)itemView.findViewById(R.id.cartname);
+            price=(TextView)itemView.findViewById(R.id.cartprice) ;
+            quantity=(TextView)itemView.findViewById(R.id.cartquantity);
             delete=(Button)itemView.findViewById(R.id.delete);
             cardview=(CardView)itemView.findViewById(R.id.cartview);
             //   quantity=(TextView)itemView.findViewById(R.id.quantity);

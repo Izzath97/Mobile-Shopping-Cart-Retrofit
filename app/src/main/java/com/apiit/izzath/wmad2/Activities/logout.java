@@ -20,5 +20,6 @@ public class logout extends AppCompatActivity {
         SharedPreferences.Editor editor = sp.edit();
         editor.clear();
         finish();
+
     }
 }

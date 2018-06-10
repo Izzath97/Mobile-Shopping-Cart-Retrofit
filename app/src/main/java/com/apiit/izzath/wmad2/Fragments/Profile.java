@@ -37,7 +37,6 @@ public class Profile extends Fragment {
         name=(TextView )view.findViewById(R.id.name);
         email=(TextView)view.findViewById(R.id.email);
 
-      //  user=Register.listAll(Register.class);
         SharedPreferences sp= this.getActivity().getApplicationContext().getSharedPreferences(login.MyPREFERENCES, Context.MODE_PRIVATE);
         Register rgg=Register.findById(Register.class,sp.getLong("id",10));
 

@@ -45,7 +45,7 @@ public class AddCart extends Fragment {
         List<Cart> car = Cart.findWithQuery(Cart.class, "Select * from Cart where user = ? and status = ? ", id.toString(), "Pending");
         card = new CartAdapter(car, getContext());
         cartView.setAdapter(card);
-
+        card.notifyDataSetChanged();
 
         final List<Cart> cartlist = Cart.findWithQuery(Cart.class, "Select * from Cart where user = ? and status = ? ", id.toString(), "Pending");
 
@@ -56,10 +56,14 @@ public class AddCart extends Fragment {
 
         }
 
-        txtquantity = (TextView) view.findViewById(R.id.allquantity);
+        txtquantity = (TextView) view.findViewById(R.id.cartname);
         txtprice = (TextView) view.findViewById(R.id.allprice);
         txtprice.setText("Rs :" + String.valueOf(price));
         txtquantity.setText("Total Items :" + String.valueOf(quantity));
+
+        if(cartlist.isEmpty()){
+            checkout.setEnabled(false);
+        }
 
         checkout.setOnClickListener(new View.OnClickListener() {
             @Override

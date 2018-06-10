@@ -14,6 +14,7 @@ import android.widget.TextView;
 import com.apiit.izzath.wmad2.Activities.login;
 import com.apiit.izzath.wmad2.Models.Cart;
 import com.apiit.izzath.wmad2.Models.Purchase;
+import com.apiit.izzath.wmad2.Models.Register;
 import com.apiit.izzath.wmad2.R;
 
 import java.util.Calendar;
@@ -24,7 +25,7 @@ import java.util.List;
  */
 
 public class Checkout extends Fragment{
-    TextView txtquantity,txtprice;
+    TextView txtquantity,txtprice,txtname,txtemail;
 private   double price;
 private int quantity;
 Button buy;
@@ -35,6 +36,7 @@ Button buy;
 
         SharedPreferences sp= getActivity().getSharedPreferences(login.MyPREFERENCES, Context.MODE_PRIVATE);
         Long id=sp.getLong("id",10);
+        Register user=Register.findById(Register.class,id);
         final List<Cart> car= Cart.findWithQuery(Cart.class, "Select * from Cart where user = ? and status = ? ", id.toString(),"Pending");
 
         for (Cart cart:car) {
@@ -42,11 +44,12 @@ Button buy;
         price=price+prices;
         quantity=quantity+cart.getQuantity();
 
-
-
         }
-
-        txtquantity=(TextView)view.findViewById(R.id.allquantity);
+        txtname=(TextView)view.findViewById(R.id.name);
+        txtemail=(TextView)view.findViewById(R.id.email);
+        txtname.setText( "Name   :"+user.getName());
+        txtemail.setText("E-Mail :"+user.getEmail());
+        txtquantity=(TextView)view.findViewById(R.id.cartname);
         txtprice=(TextView)view.findViewById(R.id.allprice);
         txtprice.setText("Rs :"+ String.valueOf(price));
         txtquantity.setText("Total Items :"+String.valueOf(quantity));
@@ -54,18 +57,14 @@ Button buy;
         buy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Purchase purchase=new Purchase();
-                for (Cart cart:car) {
-                    Calendar calendar = Calendar.getInstance();
 
-//                    purchase.setDate((Date) calendar.getTime());
-//                    purchase.setTime((Time) calendar.getTime());
+                for (Cart cart:car) {
+                    Purchase purchase=new Purchase();
+                    Calendar calendar = Calendar.getInstance();
                     cart.setStatus("Purchased");
                     cart.save();
                     purchase.setCart(cart);
                     purchase.save();
-                   //asda
-
                     List<Purchase> pp2=Purchase.listAll(Purchase.class);
 
                 }
