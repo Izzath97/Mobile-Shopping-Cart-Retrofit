@@ -1,5 +1,6 @@
 package com.apiit.izzath.wmad2.Fragments;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -142,7 +143,17 @@ public class detailScreen extends Fragment {
             longDescription.setText(product.getLongDescription());
             Picasso.get().load(product.getScaledImage()).into(img);
             quantityview.setText(Integer.toString(product.getQuantity()));
-
+            img.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Dialog dialog=new Dialog(getContext());
+                    dialog.setTitle("Purchase History Detail");
+                    dialog.setContentView(R.layout.image);
+                    ImageView date=(ImageView) dialog.findViewById(R.id.dimage);
+                    Picasso.get().load(product.getFullImage()).into(date);
+                    dialog.show();
+                }
+            });
 
 
 

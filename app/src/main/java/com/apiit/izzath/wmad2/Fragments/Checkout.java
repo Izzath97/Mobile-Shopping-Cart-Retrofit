@@ -17,6 +17,8 @@ import com.apiit.izzath.wmad2.Models.Purchase;
 import com.apiit.izzath.wmad2.Models.Register;
 import com.apiit.izzath.wmad2.R;
 
+import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
 
@@ -57,15 +59,19 @@ Button buy;
         buy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Date date=new Date(Calendar.DATE);
+                SimpleDateFormat format=new SimpleDateFormat("dd-MM-yyyy");
+                String postedDate = format.format(date);
                 for (Cart cart:car) {
                     Purchase purchase=new Purchase();
                     Calendar calendar = Calendar.getInstance();
                     cart.setStatus("Purchased");
                     cart.save();
                     purchase.setCart(cart);
+                    purchase.setDate(date);
                     purchase.save();
                     List<Purchase> pp2=Purchase.listAll(Purchase.class);
+                    List<Purchase> pps2=Purchase.listAll(Purchase.class);
 
                 }
 
