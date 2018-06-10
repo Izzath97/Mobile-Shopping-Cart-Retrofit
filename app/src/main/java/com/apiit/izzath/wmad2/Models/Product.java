@@ -16,7 +16,7 @@ public class Product extends SugarRecord<Product> {
     private boolean Active;
     private String ScaledImage;
     private String FullImage;
-    ArrayList<String> Tag;
+    ArrayList<String> Tagging;
 
 
 
@@ -36,12 +36,12 @@ public class Product extends SugarRecord<Product> {
     public Product() {
     }
 
-    public ArrayList<String> getTag() {
-        return Tag;
+    public ArrayList<String> getTagging() {
+        return Tagging;
     }
 
-    public void setTag(ArrayList<String> tag) {
-        Tag = tag;
+    public void setTagging(ArrayList<String> tagging) {
+        tagging = tagging;
     }
 
     public void setName(String name) {

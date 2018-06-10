@@ -30,6 +30,8 @@ public class home1 extends Fragment {
         List <Favorites> favorites=Favorites.find(Favorites.class,"user = ?",userid.toString());
         GridView gridview = (GridView)view. findViewById(R.id.gridview1);
         gridview.setAdapter(new Adapter1(favorites,getContext()));
+
+
         return view;
     }
 

@@ -56,7 +56,7 @@ public class Adapter1 extends BaseAdapter {
 
             imageView = new ImageView(mContext);
             imageView.setLayoutParams(new ViewGroup.LayoutParams(400, 400));
-            imageView.setScaleType(ImageView.ScaleType.FIT_CENTER);
+            imageView.setScaleType(ImageView.ScaleType.FIT_END);
             imageView.setPadding(6, 4, 3, 8);
         } else {
             imageView = (ImageView) convertView;

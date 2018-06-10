@@ -18,9 +18,8 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.apiit.izzath.wmad2.Fragments.AddCart;
-import com.apiit.izzath.wmad2.Fragments.Checkout;
+import com.apiit.izzath.wmad2.Fragments.CancelOrders;
 import com.apiit.izzath.wmad2.Fragments.Home;
-import com.apiit.izzath.wmad2.Fragments.ManageAccounts;
 import com.apiit.izzath.wmad2.Fragments.Profile;
 import com.apiit.izzath.wmad2.Fragments.PurchaseHistory;
 import com.apiit.izzath.wmad2.Fragments.default_home;
@@ -140,7 +139,7 @@ public class Drawer extends AppCompatActivity
         }
         else if (id == R.id.cata) {
             fragment= new default_home();
-            Toast.makeText(this, "Profile", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Catagories", Toast.LENGTH_SHORT).show();
             setTitle("Style Omega");
         }
         else if (id == R.id.account) {
@@ -160,11 +159,7 @@ public class Drawer extends AppCompatActivity
 
 
         }
-        else if (id == R.id.checkout) {
-            fragment=new Checkout();
-            setTitle("Checkout");
 
-        }
         else if (id == R.id.purchase) {
                 fragment=new PurchaseHistory();
                 setTitle("Purchase History");
@@ -182,7 +177,7 @@ public class Drawer extends AppCompatActivity
 
         }
         else if (id == R.id.settings) {
-            fragment=new ManageAccounts();
+            fragment=new CancelOrders();
             setTitle("Settings");
         }
         if(fragment!=null){

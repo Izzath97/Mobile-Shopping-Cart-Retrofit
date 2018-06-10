@@ -37,7 +37,6 @@ public class Home extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
         adapters = new adapter(products, getContext());
-        adapters.notifyDataSetChanged();
         recyclerView.setAdapter(adapters);
 
 

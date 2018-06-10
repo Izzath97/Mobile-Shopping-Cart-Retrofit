@@ -58,8 +58,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
                 int quantity=carts.getQuantity()+product.getQuantity();
                 product.setQuantity(quantity);
                 product.save();
-                carts.setQuantity(0);
-                carts.setTotal(0);
+
                 carts.save();
 
             }

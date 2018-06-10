@@ -11,7 +11,7 @@
             android:title="Catagories" />
         <item android:id="@+id/account" android:title="Profile" android:icon="@drawable/profile"/>
         <item android:id="@+id/addcart" android:title="Cart View" android:icon="@drawable/add_cart"/>
-        <item android:id="@+id/checkout" android:title="Check Out"/>
+
         <item
             android:id="@+id/wish"
             android:icon="@drawable/contact"
@@ -22,16 +22,26 @@
 
 
     </group>
-
+<group></group>
     <item android:title="Communicate">
         <menu>
+
 
             <item
                 android:id="@+id/settings"
                 android:icon="@drawable/ic_menu_share"
                 android:title="Settings" />
 
-            <item android:id="@+id/logout" android:title="Log Out"/>
+        </menu>
+    </item>
+    <item android:title="Communicate">
+        <menu>
+
+            <item
+                android:id="@+id/logout"
+                android:title="Log Out" />
+
+
         </menu>
     </item>
 
