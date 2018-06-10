@@ -78,8 +78,8 @@ public class detailScreen extends Fragment {
         bcomment=(Button)view.findViewById(R.id.bcomment);
         rb=(RatingBar)view.findViewById(R.id.ratingBar);
 
-        ListView listview=(ListView)view.findViewById(R.id.reviewview);     // ListView For view Reviews
-        List<Reviews> reee=Reviews.listAll(Reviews.class);
+        final ListView listview=(ListView)view.findViewById(R.id.reviewview);     // ListView For view Reviews
+
         List<Reviews> reviews= Reviews.findWithQuery(Reviews.class, "Select * from Reviews where   product = ? ",products.getId().toString());
         final ReviewAdapter rv=new ReviewAdapter(getContext(),reviews);
         listview.setAdapter(rv);
@@ -101,7 +101,10 @@ public class detailScreen extends Fragment {
                 String commnt=comment.getText().toString();
                 Reviews reviews=new Reviews(uss,products,value,commnt);
                 reviews.save();
-                rv.notifyDataSetChanged();
+                List<Reviews> reviewss= Reviews.findWithQuery(Reviews.class, "Select * from Reviews where   product = ? ",products.getId().toString());
+                final ReviewAdapter rv=new ReviewAdapter(getContext(),reviewss);
+                listview.setAdapter(rv);
+
 
             }
         });

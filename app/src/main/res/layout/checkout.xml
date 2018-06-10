@@ -78,13 +78,14 @@
                     android:orientation="vertical">
 
                     <EditText
+                        android:id="@+id/number"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:maxLength="16"
                         android:ems="10"
                         android:hint="Credit Card Number"
-                        android:inputType="textPersonName"
+                        android:inputType="number"
+                        android:maxLength="16"
                         android:textSize="10sp" />
                 </LinearLayout>
 
@@ -94,13 +95,28 @@
                     android:orientation="vertical">
 
                     <EditText
-                        android:id="@+id/editText"
+                        android:id="@+id/cvc"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:ems="10"
-                        android:maxLength="3"
                         android:hint="CVC"
-                        android:inputType="textPersonName"
+                        android:inputType="number"
+                        android:maxLength="3"
+                        android:textSize="10sp" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:orientation="vertical">
+
+                    <EditText
+                        android:id="@+id/address"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:maxLength="50"
+                        android:hint="Address"
+                        android:inputType="text"
                         android:textSize="10sp" />
                 </LinearLayout>
 

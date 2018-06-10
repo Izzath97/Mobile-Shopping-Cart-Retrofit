@@ -42,7 +42,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
     }
 
     @Override
-    public void onBindViewHolder(final ViewHolder holder, int position) {
+    public void onBindViewHolder(final ViewHolder holder, final int position) {
         final Cart carts = cart.get(position);
 
         holder.name.setText(carts.getProduct().getShortDescription());
@@ -58,8 +58,8 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
                 int quantity=carts.getQuantity()+product.getQuantity();
                 product.setQuantity(quantity);
                 product.save();
-
                 carts.save();
+           notifyItemRemoved(position);
 
             }
         });

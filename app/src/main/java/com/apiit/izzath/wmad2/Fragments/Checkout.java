@@ -9,7 +9,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.apiit.izzath.wmad2.Activities.login;
 import com.apiit.izzath.wmad2.Models.Cart;
@@ -28,6 +30,7 @@ import java.util.List;
 
 public class Checkout extends Fragment{
     TextView txtquantity,txtprice,txtname,txtemail;
+    EditText number,cvc,address;
 private   double price;
 private int quantity;
 Button buy;
@@ -49,29 +52,50 @@ Button buy;
         }
         txtname=(TextView)view.findViewById(R.id.name);
         txtemail=(TextView)view.findViewById(R.id.email);
-        txtname.setText( "Name   :"+user.getName());
-        txtemail.setText("E-Mail :"+user.getEmail());
         txtquantity=(TextView)view.findViewById(R.id.cartname);
         txtprice=(TextView)view.findViewById(R.id.allprice);
+        number=(EditText)view.findViewById(R.id.number);
+        cvc=(EditText)view.findViewById(R.id.cvc);
+        address=(EditText)view.findViewById(R.id.address);
+
+
+        txtname.setText( "Name   :"+user.getName());
+        txtemail.setText("E-Mail :"+user.getEmail());
         txtprice.setText("Rs :"+ String.valueOf(price));
         txtquantity.setText("Total Items :"+String.valueOf(quantity));
+
         buy=(Button)view.findViewById(R.id.pay);
         buy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Date date=new Date(Calendar.DATE);
-                SimpleDateFormat format=new SimpleDateFormat("dd-MM-yyyy");
-                String postedDate = format.format(date);
-                for (Cart cart:car) {
-                    Purchase purchase=new Purchase();
-                    Calendar calendar = Calendar.getInstance();
-                    cart.setStatus("Purchased");
-                    cart.save();
-                    purchase.setCart(cart);
-                    purchase.setDate(date);
-                    purchase.save();
-                    List<Purchase> pp2=Purchase.listAll(Purchase.class);
-                    List<Purchase> pps2=Purchase.listAll(Purchase.class);
+
+                String cnumber=number.getText().toString();
+                String cvcnumber=cvc.getText().toString();
+                String addres=address.getText().toString();
+
+                if(cnumber.isEmpty()||cvcnumber.isEmpty()||addres.isEmpty()){
+                    Toast.makeText(getContext(), "Fill The Fields to Purchase Items", Toast.LENGTH_SHORT).show();
+
+                }
+                else{
+                    Date date=new Date(Calendar.DATE);
+                    SimpleDateFormat format=new SimpleDateFormat("dd-MM-yyyy");
+                    String postedDate = format.format(date);
+                    for (Cart cart:car) {
+                        Purchase purchase=new Purchase();
+                        Calendar calendar = Calendar.getInstance();
+                        cart.setStatus("Purchased");
+                        cart.save();
+                        purchase.setCart(cart);
+                        purchase.setDate(date);
+                        purchase.setNumber(cnumber);
+                        purchase.setAddress(addres);
+                        purchase.save();
+                        List<Purchase> pp2=Purchase.listAll(Purchase.class);
+                        List<Purchase> pps2=Purchase.listAll(Purchase.class);
+                }
+
+
 
                 }
 

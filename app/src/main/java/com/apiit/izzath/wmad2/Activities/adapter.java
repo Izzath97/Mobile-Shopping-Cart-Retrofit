@@ -48,7 +48,6 @@ private Context context;
     @SuppressLint("ResourceAsColor")
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-
         final Product product=listitem.get(position);
         holder.cat.setText(product.getName());
         holder.dec.setText(product.getShortDescription());

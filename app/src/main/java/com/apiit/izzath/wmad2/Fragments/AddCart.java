@@ -46,7 +46,6 @@ public class AddCart extends Fragment {
         card = new CartAdapter(car, getContext());
         cartView.setAdapter(card);
 
-
         final List<Cart> cartlist = Cart.findWithQuery(Cart.class, "Select * from Cart where user = ? and status = ? ", id.toString(), "Pending");
 
         for (Cart cart : cartlist) {
