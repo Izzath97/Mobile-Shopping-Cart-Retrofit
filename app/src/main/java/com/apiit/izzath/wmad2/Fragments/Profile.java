@@ -41,15 +41,8 @@ public class Profile extends Fragment {
         Register rgg=Register.findById(Register.class,sp.getLong("id",10));
 
         List<Register> user= Register.findWithQuery(Register.class, "Select * from Register where name = ?",sp.getString("User","Name"));
-
-
-
                 name.setText(rgg.getName());
                 email.setText(rgg.getEmail());
-
-
-
-
 
         edit.setOnClickListener(new View.OnClickListener() {
             @Override

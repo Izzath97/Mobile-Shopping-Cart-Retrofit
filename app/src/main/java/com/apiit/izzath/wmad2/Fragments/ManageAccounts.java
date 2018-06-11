@@ -59,21 +59,16 @@ public class ManageAccounts extends Fragment {
             @Override
             public void onClick(View view) {
                 if(pass.equals(currentPassword.getText().toString())){
-
-
-                    Register rff= SugarRecord.findById(Register.class,id);
-
-                    rff.setName(name.getText().toString());
-                    rff.setEmail(email.getText().toString());
-                    rff.setPassword1(confirmPassword.getText().toString());
-                    rff.save();
+                    Register register= SugarRecord.findById(Register.class,id);
+                    register.setName(name.getText().toString());
+                    register.setEmail(email.getText().toString());
+                    register.setPassword1(confirmPassword.getText().toString());
+                    register.save();
                     Toast.makeText(getContext(), "Sucessfullt Updated Profile", Toast.LENGTH_SHORT).show();
                     Fragment fragment=new Profile();
                     FragmentManager fm=getActivity().getSupportFragmentManager();
                     fm.beginTransaction().replace(R.id.aaa,fragment).commit();
-
                 }
-
             }
         });
 

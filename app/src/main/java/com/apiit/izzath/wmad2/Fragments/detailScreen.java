@@ -84,58 +84,59 @@ public class detailScreen extends Fragment {
         final ReviewAdapter rv=new ReviewAdapter(getContext(),reviews);
         listview.setAdapter(rv);
 
-        rb.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
+     rb.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
         @Override
         public void onRatingChanged(RatingBar ratingBar, float v, boolean b) {
         value=v;
         }
         });
-        bcomment.setOnClickListener(new View.OnClickListener() {
+
+     bcomment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                SharedPreferences sp = getActivity().getSharedPreferences(login.MyPREFERENCES, Context.MODE_PRIVATE);
-                final Long userids = sp.getLong("id", 10);
-
-                SimpleDateFormat format =new SimpleDateFormat("dd-MM-yyyy hh:mm:ss a");
-                Register uss=Register.findById(Register.class,userids);
-                String commnt=comment.getText().toString();
-                Reviews reviews=new Reviews(uss,products,value,commnt);
-                reviews.save();
-                List<Reviews> reviewss= Reviews.findWithQuery(Reviews.class, "Select * from Reviews where   product = ? ",products.getId().toString());
-                final ReviewAdapter rv=new ReviewAdapter(getContext(),reviewss);
-                listview.setAdapter(rv);
-
-
+     SharedPreferences sp = getActivity().getSharedPreferences(login.MyPREFERENCES, Context.MODE_PRIVATE);
+     final Long userids = sp.getLong("id", 10);
+     SimpleDateFormat format =new SimpleDateFormat("dd-MM-yyyy hh:mm:ss a");
+     Register uss=Register.findById(Register.class,userids);
+     String commnt=comment.getText().toString();
+     Reviews reviews=new Reviews(uss,products,value,commnt);
+     reviews.save();
+     List<Reviews> reviewss=
+     Reviews.findWithQuery(Reviews.class, "Select * from Reviews where   product = ? ",products.getId().toString());
+     final ReviewAdapter rv=new ReviewAdapter(getContext(),reviewss);
+     listview.setAdapter(rv);
             }
         });
 
-            wish.setOnClickListener(new View.OnClickListener() {
+
+  wish.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Boolean check=false;
-                    SharedPreferences sp = getActivity().getSharedPreferences(login.MyPREFERENCES, Context.MODE_PRIVATE);
-                    final Long userids = sp.getLong("id", 10);
-                    Register uss=Register.findById(Register.class,userids);
-                   List <Favorites> fav=Favorites.listAll(Favorites.class);
-                    for (Favorites fa:fav
-                         ) {
-                      if(  fa.getProduct().getId().equals(products.getId())&&fa.getUser().getId().equals(userids)){
-                          check=true;
-
-                      }
-                    }
-                    if(check.equals(true)){
-                        Toast.makeText(getContext(), "The Product is already Added to Favorites", Toast.LENGTH_SHORT).show();
-                    }
-                    else if (check==false){
-                        Favorites favorites=new Favorites();
-                        favorites.setProduct(products);
-                        favorites.setUser(uss);
-                        favorites.save();
-                    }
-
+  Boolean check=false;
+  SharedPreferences sp = getActivity().getSharedPreferences(login.MyPREFERENCES, Context.MODE_PRIVATE);
+  final Long userids = sp.getLong("id", 10);
+  Register uss=Register.findById(Register.class,userids);
+  List <Favorites> fav=Favorites.listAll(Favorites.class);
+  for (Favorites fa:fav
+  ) {
+  if(  fa.getProduct().getId().equals(products.getId())&&fa.getUser().getId().equals(userids)){
+  check=true;
+   }
+     }
+      if(check.equals(true)){
+   Toast.makeText(getContext(), "The Product is already Added to Favorites", Toast.LENGTH_SHORT).show();
+       }
+        else if (check==false){
+          Favorites favorites=new Favorites();
+          favorites.setProduct(products);
+          favorites.setUser(uss);
+          favorites.save();
+          }
                 }
             });
+
+
+
 
             ImageView img=(ImageView)view.findViewById(R.id.imageView7);
             final Product product=Product.findById(Product.class,id);
@@ -228,6 +229,8 @@ public class detailScreen extends Fragment {
                 startActivity(Intent.createChooser(share, "Share Via"));
             }
         });
+
+
 
         return  view;
 

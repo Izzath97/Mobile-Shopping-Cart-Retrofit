@@ -25,6 +25,7 @@ public class login extends AppCompatActivity {
     Button login;
     ImageView user ,passs;
     public static final String MyPREFERENCES = "MyPrefs" ;
+    Long id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,28 +52,33 @@ public class login extends AppCompatActivity {
         @Override
         public void onClick(View view) {
             List<Register> regiss=Register.listAll(Register.class);
-
+            boolean check=false;
             String users=etusername.getText().toString();
             String pass=etpassword.getText().toString();
             for (Register rg:regiss) {
                 if((users.equals(rg.getName().toString())) && (pass.equals(rg.getPassword1().toString()))) {
-
-                    SharedPreferences sp =getApplicationContext().getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
-                    SharedPreferences.Editor editor = sp.edit();
-                    editor.putString("User",users);
-                    editor.putLong("id",rg.getId());
-                    editor.commit();
-                    Toast.makeText(com.apiit.izzath.wmad2.Activities.login.this, "Logged In", Toast.LENGTH_SHORT).show();
-                    // check=true;
-                    Intent login = new Intent(getApplicationContext(),Drawer.class);
-                    startActivity(login);
-
-                }
-                else {
-
-                    //Toast.makeText(com.apiit.izzath.wmad2.Activities.login.this, "Please Try Again", Toast.LENGTH_SHORT).show();
+                    check=true;
+                    id=rg.getId();
                 }
             }
+
+
+  if(check){
+    SharedPreferences sp =getApplicationContext().getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
+    SharedPreferences.Editor editor = sp.edit();
+    editor.putString("User",users);
+    editor.putLong("id",id);
+    editor.commit();
+    Toast.makeText(com.apiit.izzath.wmad2.Activities.login.this, "Logged In", Toast.LENGTH_SHORT).show();
+    Intent login = new Intent(getApplicationContext(),Drawer.class);
+    startActivity(login);
+           }
+  else {
+    Toast.makeText(login.this, "Enter Valid User Credintials", Toast.LENGTH_SHORT).show();
+
+        }
+
+
 
         }
     });
@@ -80,39 +86,6 @@ public class login extends AppCompatActivity {
 
     }
 
-
-//public void validate(String username,String password) throws SQLException {
-    //    boolean check=false;
-//List<Register> regiss=Register.listAll(Register.class);
-//regiss.getClass();
-//Register rgg=new Register();
-    //List<Register> user1= Register.find(Register.class,"name=?",username);
-  //  ResultSet rs = (ResultSet) Register.findWithQuery(Register.class,"Select * from Register where name=?",username);
-  //  String name2=rs.getString("name");
-  //  String password2=rs.getString("password1");
-       // List<Register> password1= Register.find(Register.class,"password1=?",password);
-   // for (Register rg:regiss) {
-     //   if((username.equals(rg.getName().toString())) && (password.equals(rg.getPassword1().toString()))) {
-       //     Toast.makeText(com.apiit.izzath.wmad2.Activities.login.this, "Pass", Toast.LENGTH_SHORT).show();
-            // check=true;
-         //   Intent login = new Intent(com.apiit.izzath.wmad2.Activities.login.this, home.class);
-          //  startActivity(login);
-      //  }
-           //  else{
-          //      Toast.makeText(com.apiit.izzath.wmad2.Activities.login.this, "Please Try Again", Toast.LENGTH_SHORT).show();
-         //   }
-
-
-   // }
- //   if(check==true){
-  //      Intent login=new Intent(com.apiit.izzath.wmad2.Activities.login.this,home.class);
-  //      startActivity(login);
-
-   // }
-
-
-
-//}
 
 
 

@@ -130,7 +130,7 @@ public class Drawer extends AppCompatActivity
         Fragment fragment=new Home();
         FragmentManager fm=getSupportFragmentManager();
         fm.beginTransaction().replace(R.id.aaa,fragment).commit();
-
+        setTitle("Style Omega");
 
     }
     @Override

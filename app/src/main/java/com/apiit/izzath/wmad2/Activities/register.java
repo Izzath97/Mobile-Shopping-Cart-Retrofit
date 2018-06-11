@@ -33,8 +33,6 @@ public void cc(View view){}
         boolean check=true;
         initialize();
         if(!validate()){
-
-
             Toast.makeText(this, "SignUp has Failed", Toast.LENGTH_SHORT).show();
             }
             else{
@@ -45,12 +43,9 @@ public void cc(View view){}
                     Toast.makeText(this, "Please Enter Another UserName", Toast.LENGTH_SHORT).show();
                     name.setError("User Already Exist");
                 }
-
             }
             if(check==true){
                 Register rg=new Register(name.getText().toString(),password1.getText().toString(),password2.getText().toString(),email.getText().toString(),age.getText().toString());
-                //  SugarRecord.saveInTx(rg);
-
                 rg.save();
                 Toast.makeText(register.this, "Successfully Registered with the APP", Toast.LENGTH_SHORT).show();
                 Intent in=new Intent(getApplicationContext(),login.class);
