@@ -59,10 +59,10 @@ Button buy;
         address=(EditText)view.findViewById(R.id.address);
 
 
-        txtname.setText( "Name   :"+user.getName());
-        txtemail.setText("E-Mail :"+user.getEmail());
-        txtprice.setText("Rs :"+ String.valueOf(price));
-        txtquantity.setText("Total Items :"+String.valueOf(quantity));
+        txtname.setText( "Name   : "+user.getName());
+        txtemail.setText("E-Mail : "+user.getEmail());
+        txtprice.setText("Rs : "+ String.valueOf(price));
+        txtquantity.setText("Total Items : "+String.valueOf(quantity));
 
         buy=(Button)view.findViewById(R.id.pay);
         buy.setOnClickListener(new View.OnClickListener() {
