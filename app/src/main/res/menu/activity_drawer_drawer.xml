@@ -33,7 +33,7 @@
             app:actionViewClass="android.widget.TextView"/>
         <item android:id="@+id/cancel"
             android:title="Canclled Orders"
-            android:icon="@drawable/cart"
+            android:icon="@drawable/cart_remove"
             app:actionViewClass="android.widget.TextView"/>
 
 
@@ -50,7 +50,7 @@
                 android:title="Settings" />
             <item
                 android:id="@+id/about"
-                android:icon="@drawable/settings_gears"
+                android:icon="@drawable/info"
                 android:title="About Us" />
 
         </menu>
