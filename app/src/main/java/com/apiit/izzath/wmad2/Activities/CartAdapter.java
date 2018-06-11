@@ -59,7 +59,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
                 product.setQuantity(quantity);
                 product.save();
                 carts.save();
-           notifyItemRemoved(position);
+
 
             }
         });

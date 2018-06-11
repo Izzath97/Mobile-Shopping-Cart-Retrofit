@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -75,7 +76,6 @@ Button buy;
 
                 if(cnumber.isEmpty()||cvcnumber.isEmpty()||addres.isEmpty()){
                     Toast.makeText(getContext(), "Fill The Fields to Purchase Items", Toast.LENGTH_SHORT).show();
-
                 }
                 else{
                     Date date=new Date(Calendar.DATE);
@@ -98,7 +98,11 @@ Button buy;
 
 
                 }
+                Toast.makeText(getContext(), "Purchase Successful", Toast.LENGTH_SHORT).show();
 
+                Fragment fragment=new Home();
+                FragmentManager fm=getActivity().getSupportFragmentManager();
+                fm.beginTransaction().replace(R.id.aaa,fragment).commit();
 
 
             }

@@ -20,6 +20,7 @@ import com.apiit.izzath.wmad2.Models.Product;
 import com.apiit.izzath.wmad2.R;
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -106,6 +107,16 @@ private Context context;
             status=(TextView)itemView.findViewById(R.id.status);
 
         }
+    }
+
+    public void update (List<Product> newlist ){
+listitem=new ArrayList<>();
+listitem.addAll(newlist);
+notifyDataSetChanged();
+
+
+
+
     }
 
 }
